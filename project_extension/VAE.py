@@ -2,6 +2,13 @@ import torch
 from torch import nn
 import torch.nn.functional as F
 
+class Flatten(nn.Module):
+    def forward(self, input):
+        return input.view(input.size(0), -1)
+
+class UnFlatten(nn.Module):
+    def forward(self, input, size=3600):
+        return input.view(input.size(0), size, 1, 1)
 
 class VAE(nn.Module):
     def __init__(self, image_channels=3, h_dim=3600, z_dim=512):
